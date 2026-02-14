@@ -20,18 +20,12 @@ header{
     text-align:center;
 }
 
-/* LOGIN (FIX AGAR TIDAK MUNCUL DI BAWAH) */
+/* LOGIN */
 #loginBox{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#e0eafc,#cfdef3);
-    z-index:999;
+    height:100vh;
 }
 
 .login-card{
@@ -137,14 +131,11 @@ footer{
 <input type="text" id="username" placeholder="Username">
 <input type="password" id="password" placeholder="Password">
 <button onclick="login()">Login</button>
-<p><small>
-Admin → admin / 1234<br>
-User → user / 1111
-</small></p>
+<p><small>Username: admin | Password: 1234</small></p>
 </div>
 </div>
 
-<!-- TOKO -->
+<!-- HALAMAN TOKO -->
 <div id="toko">
 
 <header>
@@ -161,51 +152,51 @@ User → user / 1111
 <div class="gallery" id="gallery">
 
 <div class="card">
-<img src="foto1.jpeg">
-<h3>Iblis</h3>
-<p>Rp 16000</p>
-<div class="rating">⭐⭐⭐⭐☆</div>
-<button onclick="addToCart('Iblis',16000)">Tambah</button>
+    <img src="foto1.jpeg">
+    <h3>Iblis</h3>
+    <p>Rp 16000</p>
+    <div class="rating">⭐⭐⭐⭐☆</div>
+    <button onclick="addToCart('Iblis',16000)">Tambah</button>
 </div>
 
 <div class="card">
-<img src="foto2.jpeg">
-<h3>Ratu Vampire</h3>
-<p>Rp 18000</p>
-<div class="rating">⭐⭐⭐⭐⭐</div>
-<button onclick="addToCart('Ratu Vampire',18000)">Tambah</button>
+    <img src="foto2.jpeg">
+    <h3>Ratu Vampire</h3>
+    <p>Rp 18000</p>
+    <div class="rating">⭐⭐⭐⭐⭐</div>
+    <button onclick="addToCart('Ratu Vampire',18000)">Tambah</button>
 </div>
 
 <div class="card">
-<img src="foto3.jpeg">
-<h3>Penyihir</h3>
-<p>Rp 20000</p>
-<div class="rating">⭐⭐⭐⭐☆</div>
-<button onclick="addToCart('Penyihir',20000)">Tambah</button>
+    <img src="foto3.jpeg">
+    <h3>Penyihir</h3>
+    <p>Rp 20000</p>
+    <div class="rating">⭐⭐⭐⭐☆</div>
+    <button onclick="addToCart('Penyihir',20000)">Tambah</button>
 </div>
 
 <div class="card">
-<img src="foto4.jpeg">
-<h3>Putri Duyung</h3>
-<p>Rp 22000</p>
-<div class="rating">⭐⭐⭐⭐☆</div>
-<button onclick="addToCart('Putri Duyung',22000)">Tambah</button>
+    <img src="foto4.jpeg">
+    <h3>Putri Duyung</h3>
+    <p>Rp 22000</p>
+    <div class="rating">⭐⭐⭐⭐☆</div>
+    <button onclick="addToCart('Putri Duyung',22000)">Tambah</button>
 </div>
 
 <div class="card">
-<img src="foto5.jpeg">
-<h3>Heavenly Demon</h3>
-<p>Rp 17000</p>
-<div class="rating">⭐⭐⭐⭐⭐</div>
-<button onclick="addToCart('Heavenly Demon',17000)">Tambah</button>
+    <img src="foto5.jpeg">
+    <h3>Heavenly Demon</h3>
+    <p>Rp 17000</p>
+    <div class="rating">⭐⭐⭐⭐⭐</div>
+    <button onclick="addToCart('Heavenly Demon',17000)">Tambah</button>
 </div>
 
 <div class="card">
-<img src="foto6.jpeg">
-<h3>Manusia Siluman</h3>
-<p>Rp 19000</p>
-<div class="rating">⭐⭐⭐⭐☆</div>
-<button onclick="addToCart('Manusia Siluman',19000)">Tambah</button>
+    <img src="foto6.jpeg">
+    <h3>Manusia Siluman</h3>
+    <p>Rp 19000</p>
+    <div class="rating">⭐⭐⭐⭐☆</div>
+    <button onclick="addToCart('Manusia Siluman',19000)">Tambah</button>
 </div>
 
 </div>
@@ -223,14 +214,16 @@ User → user / 1111
 <div id="cartItems"></div>
 <p>Total: Rp <span id="totalPrice">0</span></p>
 
-<select>
+<h4>Pilih Pengiriman</h4>
+<select id="shipping">
 <option>JNE</option>
 <option>J&T</option>
 <option>SiCepat</option>
 <option>Digital Download</option>
 </select>
 
-<select>
+<h4>Metode Pembayaran</h4>
+<select id="payment">
 <option>Transfer Bank</option>
 <option>E-Wallet</option>
 <option>COD</option>
@@ -242,81 +235,97 @@ User → user / 1111
 </div>
 
 <script>
-let cart={};
+let cart = {};
 
+/* LOGIN */
 function login(){
-let u=document.getElementById("username").value;
-let p=document.getElementById("password").value;
+    let u = document.getElementById("username").value;
+    let p = document.getElementById("password").value;
 
-if(
- (u==="admin" && p==="1234") ||
- (u==="user" && p==="1111")
-){
-document.getElementById("loginBox").remove();
-document.getElementById("toko").style.display="block";
-}else{
-alert("Login salah!");
-}
+    if(u==="admin" && p==="1234"){
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("toko").style.display="block";
+    } else {
+        alert("Login salah!");
+    }
 }
 
+/* TAMBAH KE KERANJANG */
 function addToCart(name,price){
-if(cart[name]) cart[name].qty++;
-else cart[name]={price:price,qty:1};
-renderCart();
+    if(cart[name]){
+        cart[name].qty++;
+    } else {
+        cart[name] = {price:price, qty:1};
+    }
+    renderCart();
 }
 
+/* TAMPILKAN KERANJANG */
 function renderCart(){
-let html="";
-let total=0;
+    let html="";
+    let total=0;
 
-for(let item in cart){
-let d=cart[item];
-total+=d.price*d.qty;
-html+=item+" x "+d.qty+"<br>";
+    for(let item in cart){
+        let data=cart[item];
+        total+=data.price*data.qty;
+        html += item + " x " + data.qty + "<br>";
+    }
+
+    document.getElementById("cartItems").innerHTML=html;
+    document.getElementById("totalPrice").innerText=total;
 }
 
-document.getElementById("cartItems").innerHTML=html;
-document.getElementById("totalPrice").innerText=total;
-}
-
+/* MODAL */
 function openCart(){
-document.getElementById("cartModal").style.display="flex";
-renderCart();
+    document.getElementById("cartModal").style.display="flex";
+    renderCart();
 }
 
 function closeCart(){
-document.getElementById("cartModal").style.display="none";
+    document.getElementById("cartModal").style.display="none";
 }
 
+/* CHECKOUT */
 function checkout(){
-alert("Pesanan berhasil diproses!");
-cart={};
-renderCart();
-closeCart();
+    alert("Pesanan berhasil diproses!");
+    cart={};
+    renderCart();
+    closeCart();
 }
 
+/* UPLOAD GAMBAR JPG */
 function uploadImage(){
-let file=document.getElementById("uploadImage").files[0];
+    let fileInput = document.getElementById("uploadImage");
+    let file = fileInput.files[0];
 
-if(!file){alert("Pilih file dulu!");return;}
-if(file.type!=="image/jpeg"){alert("Harus JPG/JPEG!");return;}
+    if(!file){
+        alert("Pilih file terlebih dahulu!");
+        return;
+    }
 
-let reader=new FileReader();
-reader.onload=function(e){
-let card=document.createElement("div");
-card.className="card";
+    if(file.type !== "image/jpeg"){
+        alert("File harus berformat JPG atau JPEG!");
+        return;
+    }
 
-card.innerHTML=`
-<img src="${e.target.result}">
-<h3>Gambar Upload</h3>
-<p>Rp 15000</p>
-<div class="rating">⭐⭐⭐⭐☆</div>
-<button onclick="addToCart('Gambar Upload',15000)">Tambah</button>
-`;
+    let reader = new FileReader();
+    reader.onload = function(e){
+        let gallery = document.getElementById("gallery");
 
-document.getElementById("gallery").appendChild(card);
-};
-reader.readAsDataURL(file);
+        let card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <img src="${e.target.result}">
+            <h3>Gambar Upload</h3>
+            <p>Rp 15000</p>
+            <div class="rating">⭐⭐⭐⭐☆</div>
+            <button onclick="addToCart('Gambar Upload',15000)">Tambah</button>
+        `;
+
+        gallery.appendChild(card);
+    };
+
+    reader.readAsDataURL(file);
 }
 </script>
 

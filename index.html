@@ -131,7 +131,6 @@ footer{
 <input type="text" id="username" placeholder="Username">
 <input type="password" id="password" placeholder="Password">
 <button onclick="login()">Login</button>
-<p><small>Username: admin | Password: 1234</small></p>
 </div>
 </div>
 
@@ -145,9 +144,9 @@ footer{
 
 <button onclick="openCart()">🛒 Keranjang</button>
 
-<h3>Upload Gambar (.jpg/.jpeg)</h3>
+<h3 id="uploadTitle">Upload Gambar (.jpg/.jpeg)</h3>
 <input type="file" id="uploadImage" accept=".jpg,.jpeg">
-<button onclick="uploadImage()">Upload</button>
+<button id="uploadBtn" onclick="uploadImage()">Upload</button>
 
 <div class="gallery" id="gallery">
 
@@ -202,7 +201,7 @@ footer{
 </div>
 
 <footer>
-© 2026 Toko Gambar - Dibuat oleh Siswa
+© 2026 Toko Gambar - Dibuat oleh Sena
 </footer>
 
 </div>
@@ -245,7 +244,20 @@ function login(){
     if(u==="admin" && p==="1234"){
         document.getElementById("loginBox").style.display="none";
         document.getElementById("toko").style.display="block";
-    } else {
+        // Admin bisa upload
+        document.getElementById("uploadTitle").style.display="block";
+        document.getElementById("uploadImage").style.display="inline";
+        document.getElementById("uploadBtn").style.display="inline";
+    } 
+    else if(u==="user" && p==="1111"){
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("toko").style.display="block";
+        // User tidak bisa upload
+        document.getElementById("uploadTitle").style.display="none";
+        document.getElementById("uploadImage").style.display="none";
+        document.getElementById("uploadBtn").style.display="none";
+    } 
+    else {
         alert("Login salah!");
     }
 }
